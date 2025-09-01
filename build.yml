@@ -1,0 +1,32 @@
+name: Build Kernel
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build Kernel
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    
+    - name: Set Up Toolchain
+      run: sudo apt-get install -y gcc-aarch64-linux-gnu
+    
+    - name: Install Dependencies
+      run: sudo apt-get install -y bc libssl-dev
+    
+    - name: Build Kernel
+      run: |
+        make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- a04br3_defconfig
+        make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
+        make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image dtbs
+    
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: kernel
+        path: |
+          arch/arm64/boot/Image
+          arch/arm64/boot/dts/mediatek/mt8167-a04-br3.dtb
