@@ -1,3 +1,2 @@
-## TAB-A04-BR3 LineageOS専用カーネルソース
+##TAB-A04-BR3 LineageOS専用カーネルソース
 - このカーネルソースは[LineageOSツリー](https://github.com/Nyaruke/android_device_sts_a04br3)専用です。
-- TWRPのビルドには最適化されていません。
