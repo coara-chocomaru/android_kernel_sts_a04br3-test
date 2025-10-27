@@ -1,0 +1,54 @@
+name: Build Kernel
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build Kernel
+    runs-on: ubuntu-22.04
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set Up Toolchain
+        run: |
+           echo "deb http://archive.ubuntu.com/ubuntu trusty main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/trusty.list
+           echo "deb http://archive.ubuntu.com/ubuntu trusty-updates main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/trusty.list
+           echo "deb http://archive.ubuntu.com/ubuntu trusty-backports main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/trusty.list
+           sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 40976EAF437D05B5
+           sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3B4FE6ACC0B21F32
+           sudo apt update
+           sudo apt-get install -y -t trusty gcc-4.8-aarch64-linux-gnu u-boot-tools
+           sudo update-alternatives --install /usr/bin/aarch64-linux-gnu-gcc aarch64-linux-gnu-gcc /usr/bin/aarch64-linux-gnu-gcc-4.8 100
+      
+      - name: Install Dependencies
+        run: |
+          sudo apt-get install -y bc libssl-dev
+      
+      - name: Build Kernel
+        run: |
+          cd ./drivers/misc/mediatek/cmdq/v2 && wget https://github.com/ibilux/android_device_tree_hermes/raw/crdroid-9.0/kernel-headers/cmdq_engine.h && cd -
+          cp ./drivers/misc/mediatek/ext_disp/mt8167/extd_platform.h ./drivers/misc/mediatek/ext_disp/
+          cp ./drivers/misc/mediatek/ext_disp/mt8167/external_display.h ./drivers/misc/mediatek/ext_disp/v1/
+          cp ./drivers/misc/mediatek/thermal/mt8167/inc/*.h ./drivers/misc/mediatek/thermal/mt8167/
+          cp -n ./drivers/misc/mediatek/uart/mt8167/* ./drivers/misc/mediatek/uart/include/
+          cp -n ./drivers/misc/mediatek/usb11/*.h ./drivers/misc/mediatek/usb11/mt8167/
+          cp -n ./drivers/misc/mediatek/video/mt8167/dispsys/*.h ./drivers/misc/mediatek/video/mt8167/videox/
+          cp -n ./drivers/misc/mediatek/video/mt8167/videox/*.h ./drivers/misc/mediatek/video/common/
+          
+          export CFLAGS="-w"
+          export CXXFLAGS="-w"
+          make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- a04br3_defconfig
+          make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
+          make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image dtbs -j$(nproc)
+      
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel
+          path: |
+            arch/arm64/boot/Image
+            arch/arm64/boot/dts/mediatek/a04br3.dtb
+            arch/arm64/boot/Image.gz
+            arch/arm64/boot/Image.gz-dtb
