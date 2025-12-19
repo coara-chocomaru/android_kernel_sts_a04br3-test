@@ -38,8 +38,8 @@ jobs:
         run: |
           sudo git clone https://github.com/coara-chocomaru/test-1.git -b test01 orig/
           sudo rm -rf ./drivers/android
-          sudo rm -rf ./include/uapi
-          cp -rf ./orig/include/uapi ./include/
+          sudo rm -rf ./include/uapi/linux
+          cp -rf ./orig/include/uapi/linux ./include/uapi/
           cp -rf ./orig/drivers/android ./drivers/
           sudo rm -rf ./orig
           cd ./drivers/misc/mediatek/cmdq/v2 && wget https://github.com/ibilux/android_device_tree_hermes/raw/crdroid-9.0/kernel-headers/cmdq_engine.h && cd -
