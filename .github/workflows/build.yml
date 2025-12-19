@@ -36,12 +36,7 @@ jobs:
             
       - name: Build Kernel
         run: |
-          sudo git clone https://github.com/coara-chocomaru/android_kernel_sts_a04br3-test.git -b main orig/
-          sudo rm -rf ./drivers/power
-          sudo rm -rf ./drivers/misc/mediatek/lcm
-          cp -rf ./orig/drivers/misc/mediatek/include/mt-plat/battery_meter.h ./drivers/misc/mediatek/include/mt-plat/
-          cp -rf ./orig/drivers/power  ./drivers/
-          cp -rf ./orig/drivers/misc/mediatek/lcm ./drivers/misc/mediatek/
+          sudo git clone https://github.com/coara-chocomaru/test-1.git -b test01 orig/
           sudo rm -rf ./orig
           cd ./drivers/misc/mediatek/cmdq/v2 && wget https://github.com/ibilux/android_device_tree_hermes/raw/crdroid-9.0/kernel-headers/cmdq_engine.h && cd -
           cd "$GITHUB_WORKSPACE"
