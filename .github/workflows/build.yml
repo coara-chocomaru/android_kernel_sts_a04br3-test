@@ -25,9 +25,24 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get install -y bc libssl-dev
-      
+
+      - name: Install Python2
+        run: |
+           sudo apt-get install -y python2.7
+           sudo apt-get install -y git
+           sudo ln -sf /usr/bin/python2.7 /usr/bin/python
+           sudo ln -sf /usr/bin/python2.7 /usr/bin/python2
+           python2 --version
+            
       - name: Build Kernel
         run: |
+          sudo git clone https://github.com/coara-chocomaru/android_kernel_sts_a04br3-test.git -b main orig/
+          sudo rm -rf ./drivers/power
+          sudo rm -rf ./drivers/misc/mediatek/lcm
+          cp -rf ./orig/drivers/misc/mediatek/include/mt-plat/battery_meter.h ./drivers/misc/mediatek/include/mt-plat/
+          cp -rf ./orig/drivers/power  ./drivers/
+          cp -rf ./orig/drivers/misc/mediatek/lcm ./drivers/misc/mediatek/
+          sudo rm -rf ./orig
           cd ./drivers/misc/mediatek/cmdq/v2 && wget https://github.com/ibilux/android_device_tree_hermes/raw/crdroid-9.0/kernel-headers/cmdq_engine.h && cd -
           cp ./drivers/misc/mediatek/ext_disp/mt8167/extd_platform.h ./drivers/misc/mediatek/ext_disp/
           cp ./drivers/misc/mediatek/ext_disp/mt8167/external_display.h ./drivers/misc/mediatek/ext_disp/v1/
