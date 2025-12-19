@@ -44,6 +44,7 @@ jobs:
           cp -rf ./orig/drivers/misc/mediatek/lcm ./drivers/misc/mediatek/
           sudo rm -rf ./orig
           cd ./drivers/misc/mediatek/cmdq/v2 && wget https://github.com/ibilux/android_device_tree_hermes/raw/crdroid-9.0/kernel-headers/cmdq_engine.h && cd -
+          cd "$GITHUB_WORKSPACE"
           cp ./drivers/misc/mediatek/ext_disp/mt8167/extd_platform.h ./drivers/misc/mediatek/ext_disp/
           cp ./drivers/misc/mediatek/ext_disp/mt8167/external_display.h ./drivers/misc/mediatek/ext_disp/v1/
           cp ./drivers/misc/mediatek/thermal/mt8167/inc/*.h ./drivers/misc/mediatek/thermal/mt8167/
@@ -51,7 +52,12 @@ jobs:
           cp -n ./drivers/misc/mediatek/usb11/*.h ./drivers/misc/mediatek/usb11/mt8167/
           cp -n ./drivers/misc/mediatek/video/mt8167/dispsys/*.h ./drivers/misc/mediatek/video/mt8167/videox/
           cp -n ./drivers/misc/mediatek/video/mt8167/videox/*.h ./drivers/misc/mediatek/video/common/
+          cd "$GITHUB_WORKSPACE"
           
+          export PYTHON=python2.7
+          alias python=python2.7
+          export ARCH=arm64
+          export CROSS_COMPILE=aarch64-linux-gnu-
           export CFLAGS="-w"
           export CXXFLAGS="-w"
           make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- a04br3_defconfig
