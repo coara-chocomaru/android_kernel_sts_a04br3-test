@@ -1,7 +1,5 @@
 name: Build Kernel
-
 on: [push, pull_request]
-
 jobs:
   build:
     name: Build Kernel
@@ -10,7 +8,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
       - name: Set Up Toolchain
         run: |
            echo "deb http://archive.ubuntu.com/ubuntu trusty main restricted universe multiverse" | sudo tee -a /etc/apt/sources.list.d/trusty.list
@@ -24,8 +21,7 @@ jobs:
       
       - name: Install Dependencies
         run: |
-          sudo apt-get install -y bc libssl-dev
-
+          sudo apt-get install -y bc libssl-dev p7zip-full
       - name: Install Python2
         run: |
            sudo apt-get install -y python2.7
@@ -33,19 +29,22 @@ jobs:
            sudo ln -sf /usr/bin/python2.7 /usr/bin/python
            sudo ln -sf /usr/bin/python2.7 /usr/bin/python2
            python2 --version
-            
+      
       - name: Build Kernel
         run: |
-          sudo git clone https://github.com/coara-chocomaru/test-1.git -b test01 orig/
-          sudo rm -rf ./drivers/android
-          sudo rm -rf ./include/uapi/linux/android
-          cp -rf ./orig/include/uapi/linux/android ./include/uapi/linux/
-          cp -rf ./orig/drivers/android ./drivers/
+          sudo git clone https://github.com/coara-chocomaru/android_kernel_sts_a04br3-test.git -b main orig/
+          sudo rm -rf ./drivers/power
+          sudo rm -rf ./drivers/misc/mediatek/lcm
+          cp -rf ./orig/drivers/misc/mediatek/include/mt-plat/battery_meter.h ./drivers/misc/mediatek/include/mt-plat/
+          cp -rf ./orig/drivers/power  ./drivers/
+          cp -rf ./orig/drivers/misc/mediatek/lcm ./drivers/misc/mediatek/
           sudo rm -rf ./orig
+          cd ./drivers/misc/mediatek/ext_disp/include
+          ln -s ../mt8167 include
+          cd "$GITHUB_WORKSPACE"
           cd ./drivers/misc/mediatek/cmdq/v2 && wget https://github.com/ibilux/android_device_tree_hermes/raw/crdroid-9.0/kernel-headers/cmdq_engine.h && cd -
           cd "$GITHUB_WORKSPACE"
-          cp ./drivers/misc/mediatek/ext_disp/mt8167/extd_platform.h ./drivers/misc/mediatek/ext_disp/
-          cp ./drivers/misc/mediatek/ext_disp/mt8167/external_display.h ./drivers/misc/mediatek/ext_disp/v1/
+          cp ./drivers/misc/mediatek/ext_disp/mt8167/extd_platform.h ./drivers/misc/mediatek/ext_disp/include/
           cp ./drivers/misc/mediatek/thermal/mt8167/inc/*.h ./drivers/misc/mediatek/thermal/mt8167/
           cp -n ./drivers/misc/mediatek/uart/mt8167/* ./drivers/misc/mediatek/uart/include/
           cp -n ./drivers/misc/mediatek/usb11/*.h ./drivers/misc/mediatek/usb11/mt8167/
@@ -62,8 +61,18 @@ jobs:
           make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- a04br3_defconfig
           make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
           make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image dtbs -j$(nproc)
-      
-      - name: Upload Artifacts
+
+      - name: Compress Kernel Source
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          7z a -t7z -mx=5 -mmt=$(nproc) kernel_source.7z . \
+            -xr'!.git' \
+            -xr'!*.o' \
+            -xr'!*.a' \
+            -xr'!*.cmd' \
+            -xr'!*.d'
+
+      - name: Upload Kernel Binaries
         uses: actions/upload-artifact@v4
         with:
           name: kernel
@@ -72,3 +81,9 @@ jobs:
             arch/arm64/boot/dts/mediatek/a04br3.dtb
             arch/arm64/boot/Image.gz
             arch/arm64/boot/Image.gz-dtb
+
+      - name: Upload Kernel Source
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel-source
+          path: kernel_source.7z
