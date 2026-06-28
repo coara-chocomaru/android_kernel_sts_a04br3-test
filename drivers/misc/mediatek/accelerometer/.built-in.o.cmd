@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/accelerometer/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/accelerometer/built-in.o drivers/misc/mediatek/accelerometer/accel.o drivers/misc/mediatek/accelerometer/accel_factory.o drivers/misc/mediatek/accelerometer/mma8x5x/built-in.o 

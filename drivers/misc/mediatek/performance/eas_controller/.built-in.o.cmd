@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/performance/eas_controller/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/performance/eas_controller/built-in.o drivers/misc/mediatek/performance/eas_controller/eas_controller.o 

@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/usb20/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/usb20/built-in.o drivers/misc/mediatek/usb20/mt8167/built-in.o drivers/misc/mediatek/usb20/musb_hdrc.o drivers/misc/mediatek/usb20/mtk_qmu.o drivers/misc/mediatek/usb20/musb_qmu.o 

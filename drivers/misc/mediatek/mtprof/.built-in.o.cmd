@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/mtprof/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/mtprof/built-in.o drivers/misc/mediatek/mtprof/bootprof.o drivers/misc/mediatek/mtprof/common.o drivers/misc/mediatek/mtprof/mtprof.o 

@@ -1,0 +1,1 @@
+cmd_sound/soc/mediatek/mt8167/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o sound/soc/mediatek/mt8167/built-in.o sound/soc/mediatek/mt8167/snd-soc-mt8167-pcm.o sound/soc/mediatek/mt8167/snd-soc-mt8167-mt6392-mach.o 

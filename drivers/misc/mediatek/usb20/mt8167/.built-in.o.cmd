@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/usb20/mt8167/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/usb20/mt8167/built-in.o drivers/misc/mediatek/usb20/mt8167/usb20.o drivers/misc/mediatek/usb20/mt8167/usb20_phy.o drivers/misc/mediatek/usb20/mt8167/usb20_host.o drivers/misc/mediatek/usb20/mt8167/usb20_phy_debugfs.o 

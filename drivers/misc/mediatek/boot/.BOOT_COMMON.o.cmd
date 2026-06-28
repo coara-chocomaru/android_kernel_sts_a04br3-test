@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/boot/BOOT_COMMON.o := aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/boot/BOOT_COMMON.o drivers/misc/mediatek/boot/mtk_boot_common.o drivers/misc/mediatek/boot/mtk_boot.o 

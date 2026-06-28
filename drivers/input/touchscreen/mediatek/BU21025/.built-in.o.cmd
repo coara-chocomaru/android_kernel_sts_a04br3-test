@@ -1,0 +1,1 @@
+cmd_drivers/input/touchscreen/mediatek/BU21025/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/input/touchscreen/mediatek/BU21025/built-in.o drivers/input/touchscreen/mediatek/BU21025/bu21025.o 

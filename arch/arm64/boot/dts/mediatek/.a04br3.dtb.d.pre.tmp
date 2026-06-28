@@ -1,0 +1,12 @@
+a04br3.o: arch/arm64/boot/dts/mediatek/a04br3.dts \
+ arch/arm64/boot/dts/mediatek/mt8167.dtsi \
+ arch/arm64/boot/dts/include/dt-bindings/clock/mt8167-clk.h \
+ arch/arm64/boot/dts/include/dt-bindings/power/mt8167-power.h \
+ arch/arm64/boot/dts/include/dt-bindings/interrupt-controller/irq.h \
+ arch/arm64/boot/dts/include/dt-bindings/interrupt-controller/arm-gic.h \
+ arch/arm64/boot/dts/include/dt-bindings/reset-controller/mt8167-resets.h \
+ arch/arm64/boot/dts/include/dt-bindings/memory/mt8167-larb-port.h \
+ arch/arm64/boot/dts/mediatek/mt8167-pinfunc.h \
+ arch/arm64/boot/dts/include/dt-bindings/pinctrl/mt65xx.h \
+ arch/arm64/boot/dts/mediatek/mt6392.dtsi \
+ arch/arm64/boot/dts/include/dt-bindings/pinctrl/mt6392-pinfunc.h

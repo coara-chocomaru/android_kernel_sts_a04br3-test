@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/sched/mtk_cpu_affinity/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/sched/mtk_cpu_affinity/built-in.o drivers/misc/mediatek/sched/mtk_cpu_affinity/mtk_sched.o drivers/misc/mediatek/sched/mtk_cpu_affinity/mtk_compat_sched.o 

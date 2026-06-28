@@ -1,0 +1,11 @@
+cmd_drivers/misc/mediatek/lcm/lcm_i2c.o := aarch64-linux-gnu-gcc -Wp,-MD,drivers/misc/mediatek/lcm/.lcm_i2c.o.d -nostdinc -isystem /usr/lib/gcc-cross/aarch64-linux-gnu/4.8/include -I./arch/arm64/include -Iarch/arm64/include/generated/uapi -Iarch/arm64/include/generated  -Iinclude -I./arch/arm64/include/uapi -Iarch/arm64/include/generated/uapi -I./include/uapi -Iinclude/generated/uapi -include ./include/linux/kconfig.h -I./drivers/misc/mediatek/include -D__KERNEL__ -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Wno-format-security -std=gnu89 -mgeneral-regs-only -fno-pic -fno-asynchronous-unwind-tables -fno-delete-null-pointer-checks -O2 --param=allow-store-data-races=0 -Wframe-larger-than=1400 -fno-stack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack -I./drivers/misc/mediatek/hibcore -I./drivers/misc/mediatek/include -I./drivers/misc/mediatek/include/mt-plat/mt8167/include -I./drivers/misc/mediatek/include/mt-plat -I./drivers/mmc/host/mediatek/mt8167 -I./drivers/misc/mediatek/lcm/inc -I./drivers/misc/mediatek/video/mt8167/dispsys -I./drivers/misc/mediatek/video/mt8167/dispsys/mt6735 -I./drivers/misc/mediatek/video/mt8167/videox -I./drivers/misc/mediatek/video/include -DAUO_WXGA_DSI -DMTK_LCM_PHYSICAL_ROTATION=\"\"    -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(lcm_i2c)"  -D"KBUILD_MODNAME=KBUILD_STR(lcm_i2c)" -c -o drivers/misc/mediatek/lcm/lcm_i2c.o drivers/misc/mediatek/lcm/lcm_i2c.c
+
+source_drivers/misc/mediatek/lcm/lcm_i2c.o := drivers/misc/mediatek/lcm/lcm_i2c.c
+
+deps_drivers/misc/mediatek/lcm/lcm_i2c.o := \
+    $(wildcard include/config/mtk/legacy.h) \
+    $(wildcard include/config/fpga/early/porting.h) \
+
+drivers/misc/mediatek/lcm/lcm_i2c.o: $(deps_drivers/misc/mediatek/lcm/lcm_i2c.o)
+
+$(deps_drivers/misc/mediatek/lcm/lcm_i2c.o):

@@ -1,0 +1,1 @@
+cmd_sound/soc/mediatek/common/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o sound/soc/mediatek/common/built-in.o sound/soc/mediatek/common/mtk-auddrv-devtree-parser.o sound/soc/mediatek/common/mtk-auddrv-underflow-mach.o sound/soc/mediatek/common/mtk-soc-pcm-btcvsd.o sound/soc/mediatek/common/mtk-soc-pcm-btcvsd-rx.o sound/soc/mediatek/common/mtk-soc-pcm-btcvsd-tx.o 

@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/zone_movable_cma/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/zone_movable_cma/built-in.o drivers/misc/mediatek/zone_movable_cma/single_cma.o drivers/misc/mediatek/zone_movable_cma/zmc_notify.o 

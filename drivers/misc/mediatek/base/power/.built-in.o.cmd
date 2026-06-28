@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/base/power/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/base/power/built-in.o drivers/misc/mediatek/base/power/mt8167/built-in.o drivers/misc/mediatek/base/power/hps_v1/built-in.o 

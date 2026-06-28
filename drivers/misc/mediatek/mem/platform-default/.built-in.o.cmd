@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/mem/platform-default/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/mem/platform-default/built-in.o drivers/misc/mediatek/mem/platform-default/mtk_hooks_64.o 

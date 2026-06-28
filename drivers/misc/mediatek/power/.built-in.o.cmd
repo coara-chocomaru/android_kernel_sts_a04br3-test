@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/power/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/power/built-in.o drivers/misc/mediatek/power/mt8167/built-in.o drivers/misc/mediatek/power/lc709203f.o drivers/misc/mediatek/power/bq24160.o 

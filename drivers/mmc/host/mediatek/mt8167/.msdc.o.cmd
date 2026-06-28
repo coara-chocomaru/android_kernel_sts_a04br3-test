@@ -1,0 +1,1 @@
+cmd_drivers/mmc/host/mediatek/mt8167/msdc.o := aarch64-linux-gnu-ld -EL   -r -o drivers/mmc/host/mediatek/mt8167/msdc.o drivers/mmc/host/mediatek/mt8167/sd.o drivers/mmc/host/mediatek/mt8167/msdc_tune.o drivers/mmc/host/mediatek/mt8167/dbg.o drivers/mmc/host/mediatek/mt8167/autok.o drivers/mmc/host/mediatek/mt8167/autok_dvfs.o drivers/mmc/host/mediatek/mt8167/msdc_io.o 

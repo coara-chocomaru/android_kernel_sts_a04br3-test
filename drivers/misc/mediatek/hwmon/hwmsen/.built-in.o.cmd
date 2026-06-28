@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/hwmon/hwmsen/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/hwmon/hwmsen/built-in.o drivers/misc/mediatek/hwmon/hwmsen/hwmsen_helper.o drivers/misc/mediatek/hwmon/hwmsen/hwmsen_dev.o 

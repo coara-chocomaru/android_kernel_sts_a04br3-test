@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/freqhopping/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/freqhopping/built-in.o drivers/misc/mediatek/freqhopping/mtk_freqhopping_drv.o drivers/misc/mediatek/freqhopping/mt8167/built-in.o 

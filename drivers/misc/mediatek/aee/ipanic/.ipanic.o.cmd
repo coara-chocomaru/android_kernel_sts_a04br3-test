@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/aee/ipanic/ipanic.o := aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/aee/ipanic/ipanic.o drivers/misc/mediatek/aee/ipanic/ipanic_log.o drivers/misc/mediatek/aee/ipanic/ipanic_rom.o drivers/misc/mediatek/aee/ipanic/ipanic_mtd.o drivers/misc/mediatek/aee/ipanic/ipanic_vfs.o drivers/misc/mediatek/aee/ipanic/ipanic_pstore.o 

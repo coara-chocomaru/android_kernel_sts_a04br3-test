@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/imgsensor/src/mt8167/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/imgsensor/src/mt8167/built-in.o drivers/misc/mediatek/imgsensor/src/mt8167/kd_sensorlist.o drivers/misc/mediatek/imgsensor/src/mt8167/camera_hw/built-in.o drivers/misc/mediatek/imgsensor/src/mt8167/hi556_mipi_raw/built-in.o 

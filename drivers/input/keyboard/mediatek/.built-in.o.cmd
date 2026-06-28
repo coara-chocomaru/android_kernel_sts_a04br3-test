@@ -1,0 +1,1 @@
+cmd_drivers/input/keyboard/mediatek/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/input/keyboard/mediatek/built-in.o drivers/input/keyboard/mediatek/kpd.o drivers/input/keyboard/mediatek/mt8167/built-in.o 

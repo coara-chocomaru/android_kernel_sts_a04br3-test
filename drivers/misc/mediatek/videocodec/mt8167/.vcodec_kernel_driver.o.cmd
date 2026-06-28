@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/videocodec/mt8167/vcodec_kernel_driver.o := aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/videocodec/mt8167/vcodec_kernel_driver.o drivers/misc/mediatek/videocodec/mt8167/videocodec_kernel_driver.o drivers/misc/mediatek/videocodec/mt8167/common/val/src/val.o drivers/misc/mediatek/videocodec/mt8167/common/drv/src/drv_base.o 

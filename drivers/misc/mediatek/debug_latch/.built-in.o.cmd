@@ -1,0 +1,1 @@
+cmd_drivers/misc/mediatek/debug_latch/built-in.o :=  aarch64-linux-gnu-ld -EL   -r -o drivers/misc/mediatek/debug_latch/built-in.o drivers/misc/mediatek/debug_latch/lastpc/built-in.o drivers/misc/mediatek/debug_latch/l2c_parity/built-in.o 
