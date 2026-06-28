@@ -2,6 +2,9 @@ name: Build Kernel
 
 on: [push, pull_request]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Kernel
@@ -72,3 +75,23 @@ jobs:
             arch/arm64/boot/dts/mediatek/a04br3.dtb
             arch/arm64/boot/Image.gz
             arch/arm64/boot/Image.gz-dtb
+
+      - name: Push Kernel Source to GitHub
+        run: |
+          # sudo実行により変更されたファイル権限を元に戻す
+          sudo chown -R $(whoami):$(whoami) .
+
+          # Gitのユーザー設定
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # すべての変更・生成されたソースファイルをステージング
+          git add .
+
+          # 変更がある場合のみコミットしてプッシュを実行
+          if ! git diff-index --quiet HEAD --; then
+            git commit -m "Build: auto-update kernel source [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          else
+            echo "No changes to commit."
+          fi
