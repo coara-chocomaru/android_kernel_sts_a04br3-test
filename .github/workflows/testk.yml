@@ -1,10 +1,10 @@
-name: Extract Kernel Headers
+name: Extract Kernel Headers for MT8168
 
 on: [push, pull_request]
 
 jobs:
   extract-headers:
-    name: Extract Kernel Headers for Device Tree
+    name: Extract Kernel Headers
     runs-on: ubuntu-22.04
 
     steps:
@@ -14,37 +14,22 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            build-essential \
-            bc \
-            flex \
-            bison \
-            libssl-dev \
-            device-tree-compiler \
-            cpio \
-            rsync
+          sudo apt-get install -y build-essential bc flex bison libssl-dev device-tree-compiler rsync
 
-      - name: Generate Kernel Headers (User Space API)
+      - name: Generate Kernel Headers
         run: |
           make ARCH=arm64 a04br3_defconfig
-          make ARCH=arm64 headers_install INSTALL_HDR_PATH=./usr-headers
+          make ARCH=arm64 headers_install INSTALL_HDR_PATH=./kernel-headers
 
-      - name: Collect Device Tree Bindings Headers
+      - name: Copy dt-bindings Headers
         run: |
-          mkdir -p ./dt-headers/include
-          cp -r ./include/dt-bindings ./dt-headers/include/
+          cp -r ./include/dt-bindings ./kernel-headers/include/
 
-
-      - name: (Optional) Collect Mediatek-specific Private Headers
+      - name: Package Headers
         run: |
-          mkdir -p ./extra-headers
-
-      - name: Package All Headers into ZIP
-        run: |
-          mkdir -p ./kernel-headers
-          cp -r ./usr-headers/include/* ./kernel-headers/
-          cp -r ./dt-headers/include/* ./kernel-headers/ || true
-          zip -r kernel-headers.zip ./kernel-headers/
+          mkdir -p device/mediatek/mt8167
+          mv ./kernel-headers device/mediatek/mt8167/
+          zip -r kernel-headers.zip device/mediatek/mt8167/kernel-headers/
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
