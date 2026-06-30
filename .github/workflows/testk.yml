@@ -1,0 +1,53 @@
+name: Extract Kernel Headers
+
+on: [push, pull_request]
+
+jobs:
+  extract-headers:
+    name: Extract Kernel Headers for Device Tree
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Kernel Source
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            bc \
+            flex \
+            bison \
+            libssl-dev \
+            device-tree-compiler \
+            cpio \
+            rsync
+
+      - name: Generate Kernel Headers (User Space API)
+        run: |
+          make ARCH=arm64 a04br3_defconfig
+          make ARCH=arm64 headers_install INSTALL_HDR_PATH=./usr-headers
+
+      - name: Collect Device Tree Bindings Headers
+        run: |
+          mkdir -p ./dt-headers/include
+          cp -r ./include/dt-bindings ./dt-headers/include/
+
+
+      - name: (Optional) Collect Mediatek-specific Private Headers
+        run: |
+          mkdir -p ./extra-headers
+
+      - name: Package All Headers into ZIP
+        run: |
+          mkdir -p ./kernel-headers
+          cp -r ./usr-headers/include/* ./kernel-headers/
+          cp -r ./dt-headers/include/* ./kernel-headers/ || true
+          zip -r kernel-headers.zip ./kernel-headers/
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel-headers
+          path: kernel-headers.zip
