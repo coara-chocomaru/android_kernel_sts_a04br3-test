@@ -50,7 +50,9 @@ struct fpsimd_context {
 	struct _aarch64_ctx head;
 	__u32 fpsr;
 	__u32 fpcr;
+#ifdef __LP64__
 	__uint128_t vregs[32];
+#endif
 };
 
 /* ESR_EL1 context */
